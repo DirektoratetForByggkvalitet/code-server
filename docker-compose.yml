@@ -2,6 +2,7 @@ services:
   code-server:
     container_name: code-server
     image: linuxserver/code-server:latest
+    restart: unless-stopped
     ports:
       - 8080:8443
     volumes:
@@ -10,9 +11,7 @@ services:
       PUID: 1026
       PGID: 65538
       TZ: Europe/Oslo
-      PASSWORD: FJaCfQ6*kA
       PASSWORD_HASH: $$argon2i$$v=19$$m=4096,t=3,p=1$$ty9xAakG9bnq50EkuTpFMw$$9bSQUVXHuJF4/2kHB0d20wsVTWEjWnSFio42VRp862Y
-      SUDO_PASSWORD: FJaCfQ6FJaCfQ6
       SUDO_PASSWORD_HASH: $$argon2i$$v=19$$m=4096,t=3,p=1$$8HH9B9frs6/noE7rz3Ql2A$$ES7WSiCW5mELRRVcuWA5vk6OSe9cu3OsiSygKSOLrtM
       PROXY_DOMAIN: code.wulff.biz
       DEFAULT_WORKSPACE: /config/workspace
