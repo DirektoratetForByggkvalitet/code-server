@@ -1,0 +1,13 @@
+services:
+  code-server:
+    image: linuxserver/code-server:latest
+    ports:
+      - 8080:8443
+    environment:
+      TZ: Europe/Oslo
+      SUDO_PASSWORD_HASH: $$argon2i$$v=19$$m=4096,t=3,p=1$$8HH9B9frs6/noE7rz3Ql2A$$ES7WSiCW5mELRRVcuWA5vk6OSe9cu3OsiSygKSOLrtM
+      PASSWORD_HASH: $$argon2i$$v=19$$m=4096,t=3,p=1$$ty9xAakG9bnq50EkuTpFMw$$9bSQUVXHuJF4/2kHB0d20wsVTWEjWnSFio42VRp862Y
+      PROXY_DOMAIN: code.wulff.biz
+      DEFAULT_WORKSPACE: /config/workspace
+    labels:
+      com.centurylinklabs.watchtower.enable: true
