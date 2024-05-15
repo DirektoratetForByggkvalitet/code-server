@@ -3,6 +3,8 @@ services:
     image: linuxserver/code-server:latest
     ports:
       - 8080:8443
+    volumes:
+      - ./config:/config
     environment:
       TZ: Europe/Oslo
       SUDO_PASSWORD_HASH: $$argon2i$$v=19$$m=4096,t=3,p=1$$8HH9B9frs6/noE7rz3Ql2A$$ES7WSiCW5mELRRVcuWA5vk6OSe9cu3OsiSygKSOLrtM
