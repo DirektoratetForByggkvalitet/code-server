@@ -12,7 +12,7 @@ Bygd for å kjøre som et prosjekt på Synology DSM.
 
 | Navn | Beskrivelse | Standard |
 | ----------- | ----------- | ----------- |
-| PUID | UID for brukeren som code-server kjører som | 1000 |
+| PUID | UID for brukeren som code-server kjører som. Finn ID ved å bruke kommandoen 'id' for brukeren | 1000 |
 | PGID | GUID som code-server skal benytte | 1000 |
 | TZ | Tidssonen som skal brukes | Europe/Oslo |
 | PASSWORD | Passord for å komme inn på code-server | FJaCfQ6*kA |
