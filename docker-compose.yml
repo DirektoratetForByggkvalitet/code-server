@@ -13,7 +13,7 @@ services:
       TZ: Europe/Oslo
       HASHED_PASSWORD: $$argon2i$$v=19$$m=4096,t=3,p=1$$ty9xAakG9bnq50EkuTpFMw$$9bSQUVXHuJF4/2kHB0d20wsVTWEjWnSFio42VRp862Y
       SUDO_PASSWORD: nqhT2wQ_D%xFJaCfQ6*kA
-      PROXY_DOMAIN: code-ew.lan.dibk.no
+      PROXY_DOMAIN: code.wulff.biz
       DEFAULT_WORKSPACE: /config/workspace
     labels:
       com.centurylinklabs.watchtower.enable: true
