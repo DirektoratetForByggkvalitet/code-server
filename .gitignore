@@ -5,6 +5,7 @@
 
 config/*
 !config/readme.md
+!config/scripts
 
 # Node artifact files
 node_modules/
