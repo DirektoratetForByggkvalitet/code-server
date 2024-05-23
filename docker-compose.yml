@@ -1,19 +1,21 @@
 services:
-  code-server:
-    container_name: code-server
-    image: linuxserver/code-server:latest
+  ui:
+    image: linuxserver/code-server
     restart: unless-stopped
     ports:
-      - 8443:8443
+      - 8480:8443
     volumes:
       - ./config:/config
+      - ../:/config/workspace
     environment:
-      PUID: 1026
-      PGID: 65538
+      PUID: 501
+      PGID: 20
       TZ: Europe/Oslo
       HASHED_PASSWORD: $$argon2i$$v=19$$m=4096,t=3,p=1$$ty9xAakG9bnq50EkuTpFMw$$9bSQUVXHuJF4/2kHB0d20wsVTWEjWnSFio42VRp862Y
-      SUDO_PASSWORD: nqhT2wQ_D%xFJaCfQ6*kA
-      PROXY_DOMAIN: code.wulff.biz
+      SUDO_PASSWORD_HASH: $$argon2i$$v=19$$m=4096,t=3,p=1$$l3uQLJ79pdvnUbaM3k/evw$$iRSS8qyFmQ3ITvxYM81ugWcnDtgW/pmi1aBa39+SC3I
       DEFAULT_WORKSPACE: /config/workspace
-    labels:
-      com.centurylinklabs.watchtower.enable: true
+      PHP_VERSION: 8.3
+      DOCKER_MODS: linuxserver/mods:code-server-php-cli|linuxserver/mods:code-server-nodejs|linuxserver/mods:code-server-python3|linuxserver/mods:code-server-zsh
+      PHP_EXTENSIONS: gd|imagick|opcache|mysqlnd|curl|xml|zip|intl|bcmath|redis|mbstring|dom
+      ENABLE_COMPOSER: yes
+      NODEJS_MOD_VERSION: 20
