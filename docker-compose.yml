@@ -11,11 +11,17 @@ services:
       PUID: 501
       PGID: 20
       TZ: Europe/Oslo
+      LC_ALL: nb_NO.UTF-8
+      LANG: nb_NO.UTF-8
       HASHED_PASSWORD: $$argon2i$$v=19$$m=4096,t=3,p=1$$ty9xAakG9bnq50EkuTpFMw$$9bSQUVXHuJF4/2kHB0d20wsVTWEjWnSFio42VRp862Y
       SUDO_PASSWORD_HASH: $$argon2i$$v=19$$m=4096,t=3,p=1$$l3uQLJ79pdvnUbaM3k/evw$$iRSS8qyFmQ3ITvxYM81ugWcnDtgW/pmi1aBa39+SC3I
       DEFAULT_WORKSPACE: /config/workspace
+      INSTALL_PACKAGES: language-pack-nb-base
       PHP_VERSION: 8.3
-      DOCKER_MODS: linuxserver/mods:code-server-php-cli|linuxserver/mods:code-server-nodejs|linuxserver/mods:code-server-python3|linuxserver/mods:code-server-zsh
+      DOCKER_MODS: linuxserver/mods:universal-package-install|linuxserver/mods:code-server-php-cli|linuxserver/mods:code-server-nodejs|linuxserver/mods:code-server-python3|linuxserver/mods:code-server-zsh
       PHP_EXTENSIONS: gd|imagick|opcache|mysqlnd|curl|xml|zip|intl|bcmath|redis|mbstring|dom
       ENABLE_COMPOSER: yes
       NODEJS_MOD_VERSION: 20
+      ZSH_DISABLE_COMPFIX: true
+      VSCODE_EXTENSION_IDS: MrChetan.laravel-extension-pack|ms-azuretools.vscode-docker|ms-vscode.azurecli|atlassian.atlascode
+
