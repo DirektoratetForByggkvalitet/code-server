@@ -3,18 +3,18 @@ services:
     image: linuxserver/code-server
     restart: unless-stopped
     ports:
-      - 8480:8443
+      - ${PORT}:8443
     volumes:
       - ./config:/config
       - ../:/config/workspace
     environment:
-      PUID: 501
-      PGID: 20
+      PUID: ${PUID}
+      PGID: ${PGID}
       TZ: Europe/Oslo
       LC_ALL: nb_NO.UTF-8
       LANG: nb_NO.UTF-8
-      HASHED_PASSWORD: $$argon2i$$v=19$$m=4096,t=3,p=1$$ty9xAakG9bnq50EkuTpFMw$$9bSQUVXHuJF4/2kHB0d20wsVTWEjWnSFio42VRp862Y
-      SUDO_PASSWORD_HASH: $$argon2i$$v=19$$m=4096,t=3,p=1$$l3uQLJ79pdvnUbaM3k/evw$$iRSS8qyFmQ3ITvxYM81ugWcnDtgW/pmi1aBa39+SC3I
+      HASHED_PASSWORD: ${HASHED_PASSWORD}
+      SUDO_PASSWORD_HASH: ${SUDO_PASSWORD_HASH}
       DEFAULT_WORKSPACE: /config/workspace
       INSTALL_PACKAGES: language-pack-nb-base
       PHP_VERSION: 8.3

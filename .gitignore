@@ -6,6 +6,8 @@
 config/*
 !config/readme.md
 !config/scripts
+docker-compose.env
+.env
 
 # Node artifact files
 node_modules/
