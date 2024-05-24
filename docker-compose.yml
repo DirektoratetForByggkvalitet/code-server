@@ -7,7 +7,6 @@ services:
     volumes:
       - ./config:/config
       - ../:/config/workspace
-      - ./KeyboardLayout.json:/config/data/User/KeyboardLayout.json:ro
     environment:
       PUID: ${PUID}
       PGID: ${PGID}
