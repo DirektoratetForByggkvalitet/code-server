@@ -1,8 +1,8 @@
 # Code-server
 
-Basert på linuxserver/code-server.
+Basert på linuxserver/code-server. Installerer PHP 8.3 med extensions og composer, samt nodejs, ved oppstart.
 
-Opprinnelig byg for å kjøre som et prosjekt på Synology DSM, men fungerer også på maskiner
+Opprinnelig bygd for å kjøre som et prosjekt på Synology DSM, men fungerer også på maskiner.
 
 ## Systemkrav
 
@@ -14,7 +14,7 @@ Opprinnelig byg for å kjøre som et prosjekt på Synology DSM, men fungerer ogs
 1. Endre .env hvis du ønsker å bruke andre verdier enn det som står der (``nano .env`` eller ``vi .env`` el.l.)
 1. Sett opp prosjektet ved å kjøre følgende kommando:
 ``docker compose up -d``
-1. Hvis du trenger å endre noe i .env er det ofte enklest å gjenskape hele prosjektet, slik: ``docker compose down; docker compose up -d``
+1. Hvis du trenger å endre noe i .env er det bare å kjøre ``docker compose up -d`` igjen etterpå.
 
 ## Variabler satt i docker-compose.env
 
