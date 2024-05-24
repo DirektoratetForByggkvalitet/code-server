@@ -20,7 +20,7 @@ services:
       PHP_VERSION: 8.3
       DOCKER_MODS: linuxserver/mods:universal-package-install|linuxserver/mods:code-server-php-cli|linuxserver/mods:code-server-nodejs|linuxserver/mods:code-server-extension-arguments
       PHP_EXTENSIONS: gd|imagick|opcache|mysqlnd|curl|xml|zip|intl|bcmath|redis|mbstring|dom
-      VSCODE_EXTENSION_IDS: MrChetan.laravel-extension-pack|ms-azuretools.vscode-docker|ms-vscode.azurecli|atlassian.atlascode
+      VSCODE_EXTENSION_IDS: nonoroazoro.syncing|MrChetan.laravel-extension-pack|ms-azuretools.vscode-docker|ms-vscode.azurecli|atlassian.atlascode
       ENABLE_COMPOSER: yes
       NODEJS_MOD_VERSION: 20
       ZSH_DISABLE_COMPFIX: true
