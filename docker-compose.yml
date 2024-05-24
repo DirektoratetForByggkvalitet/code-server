@@ -23,6 +23,5 @@ services:
       VSCODE_EXTENSION_IDS: nonoroazoro.syncing|MrChetan.laravel-extension-pack|ms-azuretools.vscode-docker|ms-vscode.azurecli|atlassian.atlascode
       ENABLE_COMPOSER: yes
       NODEJS_MOD_VERSION: 20
-      ZSH_DISABLE_COMPFIX: true
       
 
