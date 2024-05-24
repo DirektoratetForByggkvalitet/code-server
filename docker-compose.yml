@@ -18,7 +18,7 @@ services:
       DEFAULT_WORKSPACE: /config/workspace
       INSTALL_PACKAGES: language-pack-nb-base
       PHP_VERSION: 8.3
-      DOCKER_MODS: linuxserver/mods:universal-package-install|linuxserver/mods:code-server-php-cli|linuxserver/mods:code-server-nodejs|linuxserver/mods:code-server-python3|linuxserver/mods:code-server-zsh
+      DOCKER_MODS: linuxserver/mods:universal-package-install|linuxserver/mods:code-server-php-cli|linuxserver/mods:code-server-nodejs
       PHP_EXTENSIONS: gd|imagick|opcache|mysqlnd|curl|xml|zip|intl|bcmath|redis|mbstring|dom
       ENABLE_COMPOSER: yes
       NODEJS_MOD_VERSION: 20
