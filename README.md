@@ -24,19 +24,44 @@ Opprinnelig bygd for å kjøre som et prosjekt på Synology DSM, men fungerer og
 | PUID | UID for brukeren som code-server kjører som. Finn ID ved å bruke kommandoen 'id' for brukeren | 501 |
 | PGID | gruppe-ID som code-server skal benytte | 20 |
 | TZ | Tidssonen som skal brukes | Europe/Oslo |
-| PASSWORD | Passord for å komme inn på code-server |  |
+| PASSWORD | Passord for å logge inn på code-server |  |
 | PASSWORD_HASH | Passordet i kryptert form. Overstyrer PASSWORD | |
-| SUDO_PASSWORD | Ukryptert passord for sudo |  |
+| SUDO_PASSWORD | Ukryptert passord for sudo i code-server sin terminal |  |
 | SUDO_PASSWORD_HASH | Kryptert passord for sudo. Overstyrer SUDO_PASSWORD | |
 
 
-### Hvordan kryptere passordene?
+### Hvordan kryptere passordene
 
-Kjør følgende kommando i en Terminal (med nodejs installert):
+de krypterte passordene inneholder "$". Da må man putte passordet inni en single-quote i .env-fila. For eksempel: 
+```
+HASHED_PASSWORD='$argon2i$v=19$m=4096,t=3,p=1$NfW9onhRepXjiGKXbOiLFg$FbIRRjCUVCnyLmT2+TYZq+xtEsBoSEMeweTyruqW8Lw'
+SUDO_PASSWORD_HASH='$6$0MspJ/2dKDEMbCbU$gPATj5xac1OLEwxgZPFE8LL0K0mjAFjJ8jG96..C9hqmQ1hpKbP5cnYY/qlv3LuKoYr.Gm.3kUxDq/CMKs1wk/'
+```
+Linjene over vil sette passordet til "passordet", både for code-server og sudo-kommandoen. Ikke bruk det.
 
-``echo -n "passordet" | npx argon2-cli -e``
+Under følger beskrivelser for hvordan man krypterer passordene for de to verdiene.
 
-Det vil gi et svar som dette:
-``$argon2i$v=19$m=4096,t=3,p=1$NfW9onhRepXjiGKXbOiLFg$FbIRRjCUVCnyLmT2+TYZq+xtEsBoSEMeweTyruqW8Lw``
+#### HASHED_PASSWORD
 
-**PS!** Siden passordet inneholder "$" må man putte passordet inni en single-quote i .env-fila. For eksempel: ``HASHED_PASSWORD='$argon2i$v=19$m=4096,t=3,p=1$NfW9onhRepXjiGKXbOiLFg$FbIRRjCUVCnyLmT2+TYZq+xtEsBoSEMeweTyruqW8Lw'``
+Kjør følgende kommando i en Terminal (med node installert):
+
+```
+echo -n "passordet" | npx argon2-cli -e
+$argon2i$v=19$m=4096,t=3,p=1$NfW9onhRepXjiGKXbOiLFg$FbIRRjCUVCnyLmT2+TYZq+xtEsBoSEMeweTyruqW8Lw
+```
+Eller du kan bruke argon2-kommandoen (``brew install argon2``):
+```
+echo -n "passordet" | argon2 "en eller annen salt-kode" -e
+$argon2i$v=19$m=4096,t=3,p=1$ZW4gZWxsZXIgYW5uZW4gc2FsdC1rb2Rl$PdEpxNnNoDwO2/kTZR5mXYXTiE69xImVmUqNvGrwYQ4
+```
+
+Den siste linja er det krypterte passordet. Merk at de krypterte passordene er ulike, selv om det er det samme passordet. Det skyldes at de bruker forskjellige "salt-koder".
+
+### Hvordan sette SUDO_PASSWORD_HASH
+
+For sudo-passordet må man ha et SHA512-kryptert passord. Det er enkelt å opprette ved å kjøre følgende kommando:
+```
+openssl passwd -6 "passordet"
+$6$0MspJ/2dKDEMbCbU$gPATj5xac1OLEwxgZPFE8LL0K0mjAFjJ8jG96..C9hqmQ1hpKbP5cnYY/qlv3LuKoYr.Gm.3kUxDq/CMKs1wk/
+```
+Det krypterte passordet er altså den siste linja. Samme regler
