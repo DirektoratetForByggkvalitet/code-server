@@ -22,5 +22,4 @@ services:
       PHP_VERSION: 8.3
       PHP_EXTENSIONS: gd|imagick|opcache|curl|xml|zip|intl|bcmath|redis|mbstring|mcrypt|bz2|dom|pdo|mysql|pgsql|odbc|sqlite3|memcache|memcached
       ENABLE_COMPOSER: yes
-      NODEJS_MOD_VERSION: 20
-      
+      NODEJS_MOD_VERSION: 22
