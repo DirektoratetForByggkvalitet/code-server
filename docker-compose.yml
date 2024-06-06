@@ -20,6 +20,6 @@ services:
       DOCKER_MODS: linuxserver/mods:universal-package-install|linuxserver/mods:code-server-php-cli|linuxserver/mods:code-server-nodejs|linuxserver/mods:code-server-extension-arguments
       VSCODE_EXTENSION_IDS: nonoroazoro.syncing|MrChetan.laravel-extension-pack|ms-azuretools.vscode-docker|ms-vscode.azurecli|atlassian.atlascode|streetsidesoftware.code-spell-checker-norwegian-bokmal
       PHP_VERSION: 8.3
-      PHP_EXTENSIONS: gd|imagick|opcache|curl|xml|zip|intl|bcmath|redis|mbstring|mcrypt|bz2|dom|pdo|mysql|pgsql|odbc|sqlite3|memcache|memcached
+      PHP_EXTENSIONS: gd|imagick|opcache|curl|xml|zip|intl|bcmath|lz4|igbinary|redis|mbstring|mcrypt|bz2|dom|pdo|mysql|pgsql|odbc|sqlite3|memcache|memcached
       ENABLE_COMPOSER: yes
       NODEJS_MOD_VERSION: 22
