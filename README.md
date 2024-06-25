@@ -1,6 +1,8 @@
 # Code-server
 
-Basert på linuxserver/code-server. Installerer PHP 8.3 med extensions og composer, samt nodejs, ved oppstart.
+[In English](README.en.md)
+
+Basert på [linuxserver/code-server](https://hub.docker.com/r/linuxserver/code-server). Installerer PHP 8.3 med extensions og composer, samt nodejs, ved oppstart.
 
 Opprinnelig bygd for å kjøre som et prosjekt på Synology DSM, men fungerer også på maskiner.
 
