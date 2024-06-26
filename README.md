@@ -66,4 +66,8 @@ For sudo-passordet må man ha et SHA512-kryptert passord. Det er enkelt å oppre
 openssl passwd -6 "passordet"
 $6$0MspJ/2dKDEMbCbU$gPATj5xac1OLEwxgZPFE8LL0K0mjAFjJ8jG96..C9hqmQ1hpKbP5cnYY/qlv3LuKoYr.Gm.3kUxDq/CMKs1wk/
 ```
-Det krypterte passordet er altså den siste linja. Samme regler
+Det krypterte passordet er altså den siste linja. Husk bare å legge det inni en single-quote-blokk når du legger det inn i .env. Det er også mulig å hoppe over single-quote, men da må du erstatte alle "$" med "$$"
+
+## Lisens
+
+Dette prosjektet publiseres som åpen kildekode lisensiert under [MIT License](LICENSE.md).
