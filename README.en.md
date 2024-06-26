@@ -37,6 +37,8 @@ SUDO_PASSWORD_HASH='$6$0MspJ/2dKDEMbCbU$gPATj5xac1OLEwxgZPFE8LL0K0mjAFjJ8jG96..C
 ```
 This sets the password to "passordet", both for Code server and the sudo command. Do not use that…
 
+You may also skip the quotes or use double quotes ("), but in order for the container to read the values correctly, you must replace all "$" in the passwords with "$$".
+
 The following shows you how to build your own encrypted passwords.
 
 #### HASHED_PASSWORD
@@ -62,4 +64,8 @@ The sudo password is a SHA512 encrypted password. It is simple to create with op
 openssl passwd -6 "passordet"
 $6$0MspJ/2dKDEMbCbU$gPATj5xac1OLEwxgZPFE8LL0K0mjAFjJ8jG96..C9hqmQ1hpKbP5cnYY/qlv3LuKoYr.Gm.3kUxDq/CMKs1wk/
 ```
-Once again, the password (the last line above) must be placed in single-quotes in the .env file. You can also skip the quotes, but then you must replace all "$" in the password with "$$".
+Once again, the password (the last line above) must be placed in single-quotes in the .env file. 
+
+## License
+
+This project is published as open source with the [MIT License](LICENSE).

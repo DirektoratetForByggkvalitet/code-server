@@ -34,12 +34,14 @@ Opprinnelig bygd for å kjøre som et prosjekt på Synology DSM, men fungerer og
 
 ### Hvordan kryptere passordene
 
-de krypterte passordene inneholder "$". Da må man putte passordet inni en single-quote i .env-fila. For eksempel: 
+De krypterte passordene inneholder "$". På grunn av det må man ha passordet inni en single-quote i .env-fila. For eksempel: 
 ```
 HASHED_PASSWORD='$argon2i$v=19$m=4096,t=3,p=1$NfW9onhRepXjiGKXbOiLFg$FbIRRjCUVCnyLmT2+TYZq+xtEsBoSEMeweTyruqW8Lw'
 SUDO_PASSWORD_HASH='$6$0MspJ/2dKDEMbCbU$gPATj5xac1OLEwxgZPFE8LL0K0mjAFjJ8jG96..C9hqmQ1hpKbP5cnYY/qlv3LuKoYr.Gm.3kUxDq/CMKs1wk/'
 ```
 Linjene over vil sette passordet til "passordet", både for code-server og sudo-kommandoen. Ikke bruk det.
+
+Det er også mulig å bruke passordene uten single-quote eller inne i en vanlig quote ("), men da må du erstatte alle "$" med "$$" for at konteineren skal lese verdiene riktig.
 
 Under følger beskrivelser for hvordan man krypterer passordene for de to verdiene.
 
@@ -66,8 +68,8 @@ For sudo-passordet må man ha et SHA512-kryptert passord. Det er enkelt å oppre
 openssl passwd -6 "passordet"
 $6$0MspJ/2dKDEMbCbU$gPATj5xac1OLEwxgZPFE8LL0K0mjAFjJ8jG96..C9hqmQ1hpKbP5cnYY/qlv3LuKoYr.Gm.3kUxDq/CMKs1wk/
 ```
-Det krypterte passordet er altså den siste linja. Husk bare å legge det inni en single-quote-blokk når du legger det inn i .env. Det er også mulig å hoppe over single-quote, men da må du erstatte alle "$" med "$$"
+Det krypterte passordet er altså den siste linja.
 
 ## Lisens
 
-Dette prosjektet publiseres som åpen kildekode lisensiert under [MIT License](LICENSE.md).
+Dette prosjektet blir publisert som åpen kildekode lisensiert med [MIT License](LICENSE).
