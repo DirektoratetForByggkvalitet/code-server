@@ -18,7 +18,7 @@ Based on the Docker image [linuxserver/code-server](https://hub.docker.com/r/lin
 
 | Name | Description |Default |
 | ----------- | ----------- | ----------- |
-| PORT | Host-side TCP port for communicating with Code Server | 8480 |
+| PORT | Host-side TCP port for communicating with Code Server. The container itself will always use 8443, $PORT sets which port is exposed on the host | 8480 |
 | PUID | UID for the user running the code server. The UID can be found by running ``id <username>``. The default reflects the macOS main user | 501 |
 | PGID | Group ID to use when storing files. Default is the "staff" group i macOS | 20 |
 | TZ | The time zone that the container should use | Europe/Oslo |
@@ -55,11 +55,11 @@ echo -n "passordet" | argon2 "en eller annen salt-kode" -e
 $argon2i$v=19$m=4096,t=3,p=1$ZW4gZWxsZXIgYW5uZW4gc2FsdC1rb2Rl$PdEpxNnNoDwO2/kTZR5mXYXTiE69xImVmUqNvGrwYQ4
 ```
 
-The last line is the encrypted password. The two examples are different, even though it is the same password. This is because the metods use different salt codes.
+The last line is the encrypted password. The two examples above are different, even though it is the same password. This is because the two methods use different salts in the encryption.
 
 ### SUDO_PASSWORD_HASH
 
-The sudo password is a SHA512 encrypted password. It is simple to create with openssl:
+The encrypted sudo password must be a SHA512 encrypted password. It is simple to create with openssl:
 ```
 openssl passwd -6 "passordet"
 $6$0MspJ/2dKDEMbCbU$gPATj5xac1OLEwxgZPFE8LL0K0mjAFjJ8jG96..C9hqmQ1hpKbP5cnYY/qlv3LuKoYr.Gm.3kUxDq/CMKs1wk/

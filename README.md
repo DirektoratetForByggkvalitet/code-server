@@ -22,7 +22,7 @@ Opprinnelig bygd for å kjøre som et prosjekt på Synology DSM, men fungerer og
 
 | Navn | Beskrivelse | Standard |
 | ----------- | ----------- | ----------- |
-| PORT | TCP-porten som skal brukes for å kommunisere med code-server | 8480 |
+| PORT | TCP-porten som skal brukes for å kommunisere med code-server. Konteineren vil alltid bruke 8443, $PORT setter hvilken port som skal eksponeres til utsiden | 8480 |
 | PUID | UID for brukeren som code-server kjører som. Finn ID ved å bruke kommandoen 'id' for brukeren | 501 |
 | PGID | gruppe-ID som code-server skal benytte | 20 |
 | TZ | Tidssonen som skal brukes | Europe/Oslo |
@@ -59,16 +59,16 @@ echo -n "passordet" | argon2 "en eller annen salt-kode" -e
 $argon2i$v=19$m=4096,t=3,p=1$ZW4gZWxsZXIgYW5uZW4gc2FsdC1rb2Rl$PdEpxNnNoDwO2/kTZR5mXYXTiE69xImVmUqNvGrwYQ4
 ```
 
-Den siste linja er det krypterte passordet. Merk at de krypterte passordene er ulike, selv om det er det samme passordet. Det skyldes at de bruker forskjellige "salt-koder".
+Den siste linja viser det krypterte passordet. Merk at passordene i de to eksemplene er ulike, selv om det er det samme passordet. Det skyldes at de bruker forskjellige "salt" i krypteringen.
 
 ### Hvordan sette SUDO_PASSWORD_HASH
 
-For sudo-passordet må man ha et SHA512-kryptert passord. Det er enkelt å opprette ved å kjøre følgende kommando:
+For kryptering av sudo-passordet må man bruke SHA512-kryptering. Det er forholdsvis enkelt å opprette ved å kjøre følgende kommando:
 ```
 openssl passwd -6 "passordet"
 $6$0MspJ/2dKDEMbCbU$gPATj5xac1OLEwxgZPFE8LL0K0mjAFjJ8jG96..C9hqmQ1hpKbP5cnYY/qlv3LuKoYr.Gm.3kUxDq/CMKs1wk/
 ```
-Det krypterte passordet er altså den siste linja.
+Det krypterte passordet vil altså være linja under kommandoen.
 
 ## Lisens
 
