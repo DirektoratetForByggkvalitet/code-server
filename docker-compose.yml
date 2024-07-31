@@ -24,3 +24,5 @@ services:
       PHP_EXTENSIONS: gd|imagick|opcache|curl|xml|zip|intl|bcmath|igbinary|lz4|redis|mbstring|mcrypt|bz2|dom|pdo|mysql|pgsql|odbc|sqlite3|memcache|memcached
       ENABLE_COMPOSER: yes
       NODEJS_MOD_VERSION: 22
+      SHELL: /usr/bin/zsh
+      
