@@ -19,7 +19,7 @@ services:
       DEFAULT_WORKSPACE: /config/workspace
       INSTALL_PACKAGES: language-pack-nb-base|lz4
       DOCKER_MODS: linuxserver/mods:universal-package-install|linuxserver/mods:code-server-php-cli|linuxserver/mods:code-server-nodejs|linuxserver/mods:code-server-extension-arguments|linuxserver/mods:code-server-zsh
-      VSCODE_EXTENSION_IDS: nonoroazoro.syncing|MrChetan.laravel-extension-pack|ms-azuretools.vscode-docker|ms-vscode.azurecli|atlassian.atlascode|streetsidesoftware.code-spell-checker-norwegian-bokmal
+      VSCODE_EXTENSION_IDS: nonoroazoro.syncing|MrChetan.laravel-extension-pack|ms-azuretools.vscode-docker|ms-vscode.azurecli|streetsidesoftware.code-spell-checker-norwegian-bokmal|equinusocio.vsc-material-theme
       PHP_VERSION: 8.3
       PHP_EXTENSIONS: gd|imagick|opcache|curl|xml|zip|intl|bcmath|igbinary|lz4|redis|mbstring|mcrypt|bz2|dom|pdo|mysql|pgsql|odbc|sqlite3|memcache|memcached
       ENABLE_COMPOSER: yes
