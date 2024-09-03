@@ -36,6 +36,7 @@ services:
       traefik.http.routers.codeserver.entrypoints: https
       traefik.http.routers.codeserver.tls: true
       traefik.docker.network: backend
+      com.centurylinklabs.watchtower.enable: true
       
   frontend:
     image: traefik:latest
@@ -58,3 +59,15 @@ services:
     ports:
       - 8080:8080
       - 8443:8443
+    labels:
+      com.centurylinklabs.watchtower.enable: true
+
+  watcher:
+    image: containrrr/watchtower
+    environment:
+      TZ: Europe/Oslo
+      WATCHTOWER_CLEANUP: true
+      WATCHTOWER_LABEL_ENABLE: true
+      WATCHTOWER_SCHEDULE: "42 5 * * * *"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
