@@ -1,10 +1,13 @@
+networks:
+  backend:
+
 services:
-  ui:
+  codeserver:
     image: linuxserver/code-server
     restart: unless-stopped
-    ports:
-      - ${PORT}:8443
     privileged: true
+    networks:
+      - backend
     volumes:
       - ./config:/config
       - ../:/config/workspace
@@ -19,10 +22,39 @@ services:
       DEFAULT_WORKSPACE: /config/workspace
       INSTALL_PACKAGES: language-pack-nb-base|lz4
       DOCKER_MODS: linuxserver/mods:universal-package-install|linuxserver/mods:code-server-php-cli|linuxserver/mods:code-server-nodejs|linuxserver/mods:code-server-extension-arguments|linuxserver/mods:code-server-zsh
-      VSCODE_EXTENSION_IDS: nonoroazoro.syncing|MrChetan.laravel-extension-pack|ms-azuretools.vscode-docker|ms-vscode.azurecli|streetsidesoftware.code-spell-checker-norwegian-bokmal|equinusocio.vsc-material-theme
+      VSCODE_EXTENSION_IDS: nonoroazoro.syncing|ms-azuretools.vscode-docker|ms-vscode.azurecli|streetsidesoftware.code-spell-checker-norwegian-bokmal
       PHP_VERSION: 8.3
-      PHP_EXTENSIONS: gd|imagick|opcache|curl|xml|zip|intl|bcmath|igbinary|lz4|redis|mbstring|mcrypt|bz2|dom|pdo|mysql|pgsql|odbc|sqlite3|memcache|memcached
+      PHP_EXTENSIONS: gd|opcache|curl|xml|zip|intl|bcmath|igbinary|lz4|redis|mbstring|mcrypt|bz2|dom|pdo|mysql|pgsql|odbc|sqlite3|memcache|memcached
       ENABLE_COMPOSER: yes
       NODEJS_MOD_VERSION: 22
       SHELL: /usr/bin/zsh
+    expose:
+      - 8443
+    labels:
+      traefik.enable: true
+      traefik.http.routers.codeserver.rule: Host(`code-ew.dibk.no`)
+      traefik.http.routers.codeserver.entrypoints: https
+      traefik.http.routers.codeserver.tls: true
+      traefik.docker.network: backend
       
+  frontend:
+    image: traefik:latest
+    environment:
+      TZ: Europe/Oslo
+      CF_DNS_API_TOKEN: ukyoF5uzdW49gdzi8Ubib6QYMhZZQZtU9mPpI_Rm
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config:/config
+    command:
+      - "--providers.file.watch=true"
+      - "--providers.file.filename=/config/traefik_conf.yml"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entryPoints.https.address=:8443"
+      - "--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.myresolver.acme.dnschallenge.delaybeforecheck=0"
+    networks:
+      - backend
+    ports:
+      - 8080:8080
+      - 8443:8443
