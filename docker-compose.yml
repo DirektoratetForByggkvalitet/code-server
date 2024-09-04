@@ -71,3 +71,5 @@ services:
       WATCHTOWER_SCHEDULE: "42 5 * * * *"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - backend
