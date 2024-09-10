@@ -30,6 +30,8 @@ services:
       SHELL: /usr/bin/zsh
     expose:
       - 8443
+    ports:
+      - 127.0.0.1:8081:8443
     labels:
       traefik.enable: true
       traefik.http.routers.codeserver.rule: Host(`code-ew.dibk.no`)
@@ -57,7 +59,7 @@ services:
     networks:
       - backend
     ports:
-      - 8080:8080
+      - 127.0.0.1:8080:8080
       - 8443:8443
     labels:
       com.centurylinklabs.watchtower.enable: true
