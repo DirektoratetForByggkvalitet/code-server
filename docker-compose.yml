@@ -6,6 +6,11 @@ services:
     image: linuxserver/code-server
     restart: unless-stopped
     privileged: true
+    logging:
+      driver: json-file
+      options:
+        max-file: 5
+        max-size: 120m
     networks:
       - backend
     volumes:
