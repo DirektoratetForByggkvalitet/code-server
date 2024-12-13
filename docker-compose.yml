@@ -28,7 +28,7 @@ services:
       INSTALL_PACKAGES: language-pack-nb-base|lz4|bash
       DOCKER_MODS: linuxserver/mods:universal-package-install|linuxserver/mods:code-server-php-cli|linuxserver/mods:code-server-nodejs|linuxserver/mods:code-server-extension-arguments|linuxserver/mods:code-server-zsh
       VSCODE_EXTENSION_IDS: nonoroazoro.syncing|ms-azuretools.vscode-docker|ms-vscode.azurecli|streetsidesoftware.code-spell-checker-norwegian-bokmal
-      PHP_VERSION: 8.3
+      PHP_VERSION: 8.4
       PHP_EXTENSIONS: gd|opcache|curl|xml|zip|intl|bcmath|igbinary|redis|mbstring|mcrypt|bz2|dom|pdo|mysql|pgsql|odbc|sqlite3|memcache|memcached
       ENABLE_COMPOSER: yes
       NODEJS_MOD_VERSION: 23
