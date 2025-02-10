@@ -27,5 +27,5 @@ jobs:
       - name: Update code-server
         run: |
           cd ${HOME}/Documents/code-server
-          docker compose pull
-          docker compose up -d
+          podman compose pull
+          podman compose up -d

@@ -3,7 +3,7 @@ networks:
 
 services:
   codeserver:
-    image: linuxserver/code-server
+    image: linuxserver/code-server:latest
     restart: unless-stopped
     privileged: true
     logging:
@@ -43,15 +43,16 @@ services:
       traefik.http.routers.codeserver.entrypoints: https
       traefik.http.routers.codeserver.tls: true
       traefik.docker.network: backend
-      com.centurylinklabs.watchtower.enable: true
-      
+       
   frontend:
-    image: traefik:latest
+    image: library/traefik:latest
+    security_opt:
+      - label=type:container_runtime_t
     environment:
       TZ: Europe/Oslo
       CF_DNS_API_TOKEN: ukyoF5uzdW49gdzi8Ubib6QYMhZZQZtU9mPpI_Rm
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:z
       - ./config:/config
     command:
       - "--providers.file.watch=true"
@@ -66,17 +67,4 @@ services:
     ports:
       - 127.0.0.1:8080:8080
       - 8443:8443
-    labels:
-      com.centurylinklabs.watchtower.enable: true
-
-  watcher:
-    image: containrrr/watchtower
-    environment:
-      TZ: Europe/Oslo
-      WATCHTOWER_CLEANUP: true
-      WATCHTOWER_LABEL_ENABLE: true
-      WATCHTOWER_SCHEDULE: "42 5 * * * *"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - backend
+ 
