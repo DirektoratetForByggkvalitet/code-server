@@ -9,6 +9,7 @@ config/*
 !config/traefik*
 !config/ssl/readme.md
 !config/data/User/keyboardLayout*
+!config/.zshrc
 docker-compose.env
 .env
 

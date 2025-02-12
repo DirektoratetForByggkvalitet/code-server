@@ -1,6 +1,9 @@
 networks:
   backend:
 
+volumes:
+  config_vol:
+
 services:
   codeserver:
     image: linuxserver/code-server:latest
@@ -14,6 +17,7 @@ services:
     networks:
       - backend
     volumes:
+      - config_vol:/config
       - ./config/data/User:/config/data/User
       - ../:/Documents
       - ./code-server-custom-scripts:/custom-cont-init.d:ro
@@ -53,7 +57,7 @@ services:
       CF_DNS_API_TOKEN: ukyoF5uzdW49gdzi8Ubib6QYMhZZQZtU9mPpI_Rm
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:z
-      - ./config:/config
+      - config_vol:/config
     command:
       - "--providers.file.watch=true"
       - "--providers.file.filename=/config/traefik_conf.yml"
