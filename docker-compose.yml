@@ -11,6 +11,11 @@ services:
       options:
         max-file: 5
         max-size: 120m
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 4194304
+        hard: 8388608
     networks:
       - backend
     volumes:
