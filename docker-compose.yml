@@ -16,6 +16,7 @@ services:
     volumes:
       - ./config:/config
       - ../:/config/workspace
+      - ./custom-scripts:/custom-cont-init.d:ro
     environment:
       PUID: ${PUID}
       PGID: ${PGID}
