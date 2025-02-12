@@ -6,6 +6,9 @@
 config/*
 !config/readme.md
 !config/scripts
+!config/traefik*
+!config/ssl/readme.md
+!config/data/User/keyboardLayout*
 docker-compose.env
 .env
 

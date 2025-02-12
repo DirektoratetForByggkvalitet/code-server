@@ -11,31 +11,25 @@ services:
       options:
         max-file: 5
         max-size: 120m
-    ulimits:
-      nproc: 65535
-      nofile:
-        soft: 4194304
-        hard: 8388608
     networks:
       - backend
     volumes:
-      - ./config:/config
-      - ../:/config/workspace
-      - ./custom-scripts:/custom-cont-init.d:ro
+      - ./config/data/User:/config/data/User
+      - ../:/Documents
+      - ./code-server-custom-scripts:/custom-cont-init.d:ro
     environment:
       PUID: ${PUID}
       PGID: ${PGID}
       TZ: Europe/Oslo
       LC_ALL: nb_NO.UTF-8
-      LANG: nb_NO.UTF-8
       HASHED_PASSWORD: ${HASHED_PASSWORD}
       SUDO_PASSWORD_HASH: ${SUDO_PASSWORD_HASH}
-      DEFAULT_WORKSPACE: /config/workspace
-      INSTALL_PACKAGES: language-pack-nb-base|lz4|bash
+      DEFAULT_WORKSPACE: /config/data/User/Workspaces/dibk.code-workspace
+      INSTALL_PACKAGES: lz4|bash|language-pack-nb-base
       DOCKER_MODS: linuxserver/mods:universal-package-install|linuxserver/mods:code-server-php-cli|linuxserver/mods:code-server-nodejs|linuxserver/mods:code-server-extension-arguments|linuxserver/mods:code-server-zsh
       VSCODE_EXTENSION_IDS: nonoroazoro.syncing|ms-azuretools.vscode-docker|ms-vscode.azurecli|streetsidesoftware.code-spell-checker-norwegian-bokmal
       PHP_VERSION: 8.4
-      PHP_EXTENSIONS: gd|opcache|curl|xml|zip|intl|bcmath|igbinary|redis|mbstring|mcrypt|bz2|dom|pdo|mysql|pgsql|odbc|sqlite3|memcache|memcached
+      PHP_EXTENSIONS: gd|opcache|curl|xml|zip|intl|bcmath|igbinary|redis|mbstring|mcrypt|bz2|dom|pdo|mysql|pgsql|odbc|sqlite3
       ENABLE_COMPOSER: yes
       NODEJS_MOD_VERSION: 23
       SHELL: /usr/bin/zsh

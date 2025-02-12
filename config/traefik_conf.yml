@@ -1,0 +1,10 @@
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /config/ssl/cert.pem
+        keyFile: /config/ssl/privatekey.pem
+  options:
+    default:
+      minVersion: VersionTLS13
+
