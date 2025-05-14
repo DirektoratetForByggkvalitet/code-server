@@ -17,7 +17,7 @@ services:
       - backend
     volumes:
       - ${CONFIG_DIR}:/config
-      - code-server-custom-scripts:/custom-cont-init.d:ro
+      - ${CONFIG_DIR}/../code-server-custom-scripts:/custom-cont-init.d:ro
     environment:
       PUID: ${PUID}
       PGID: ${PGID}
