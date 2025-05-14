@@ -1,0 +1,10 @@
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /ssl/pveproxy-ssl.pem
+        keyFile: /ssl/pveproxy-ssl.key
+  options:
+    default:
+      minVersion: VersionTLS13
+
