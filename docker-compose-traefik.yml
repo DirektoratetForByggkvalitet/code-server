@@ -1,23 +1,24 @@
 services:
   server:
-      image: library/traefik:latest
-      restart: unless-stopped
-      security_opt:
-        - label=type:container_runtime_t
-      environment:
-        TZ: Europe/Oslo
-        CF_DNS_API_TOKEN: ${CF_TOKEN}
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock:z
-        - ${CONFIG_DIR}:/config
-        - /etc/pve/local:/ssl:ro
-      command:
-        - "--providers.file.watch=true"
-        - "--providers.file.filename=/config/traefik.yml"
-        - "--api.insecure=true"
-        - "--providers.docker=true"
-        - "--entryPoints.https.address=:8443"
-      ports:
-        - 8080:8080
-        - ${SSL_PORT}:8443
-  
+    image: library/traefik:latest
+    restart: unless-stopped
+    security_opt:
+      - label=type:container_runtime_t
+    environment:
+      TZ: Europe/Oslo
+      CF_DNS_API_TOKEN: ${CF_TOKEN}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:z
+      - ${CONFIG_DIR}:/config
+      - /etc/pve/local:/ssl:ro
+    command:
+      - "--providers.file.watch=true"
+      - "--providers.file.filename=/config/traefik.yml"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entryPoints.https.address=:8443"
+    ports:
+      - 8080:8080
+      - ${SSL_PORT}:8443
+    networks:
+      - backend

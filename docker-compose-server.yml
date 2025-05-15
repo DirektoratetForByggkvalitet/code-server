@@ -33,3 +33,5 @@ services:
       traefik.http.routers.codeserver.rule: Host(`${CODE_HOSTNAME}`)
       traefik.http.routers.codeserver.entrypoints: https
       traefik.http.routers.codeserver.tls: true
+    networks:
+      - backend
