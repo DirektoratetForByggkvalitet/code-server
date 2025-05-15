@@ -1,5 +1,5 @@
 services:
-  frontend:
+  server:
       image: library/traefik:latest
       restart: unless-stopped
       security_opt:
@@ -17,8 +17,6 @@ services:
         - "--api.insecure=true"
         - "--providers.docker=true"
         - "--entryPoints.https.address=:8443"
-      networks:
-        - backend
       ports:
         - 8080:8080
         - ${SSL_PORT}:8443
