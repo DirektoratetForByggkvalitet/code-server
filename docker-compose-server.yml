@@ -1,6 +1,3 @@
-networks:
-  backend:
-
 volumes:
 
 services:
@@ -13,8 +10,6 @@ services:
       options:
         max-file: 5
         max-size: 120m
-    networks:
-      - backend
     volumes:
       - ${CONFIG_DIR}:/config
       - ${CONFIG_DIR}/../code-server-custom-scripts:/custom-cont-init.d:ro
@@ -41,28 +36,3 @@ services:
       traefik.http.routers.codeserver.entrypoints: https
       traefik.http.routers.codeserver.tls: true
       traefik.docker.network: backend
-       
-  frontend:
-    image: library/traefik:latest
-    restart: unless-stopped
-    security_opt:
-      - label=type:container_runtime_t
-    environment:
-      TZ: Europe/Oslo
-      CF_DNS_API_TOKEN: ${CF_TOKEN}
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:z
-      - ${CONFIG_DIR}:/config
-      - /etc/pve/local:/ssl:ro
-    command:
-      - "--providers.file.watch=true"
-      - "--providers.file.filename=/config/traefik_nas.yml"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--entryPoints.https.address=:${SSL_PORT}"
-    networks:
-      - backend
-    ports:
-      - 8080:8080
-      - ${SSL_PORT}:8443
- 
