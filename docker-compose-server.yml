@@ -1,5 +1,3 @@
-volumes:
-
 services:
   codeserver:
     image: linuxserver/code-server:latest
