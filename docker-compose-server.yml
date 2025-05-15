@@ -11,8 +11,8 @@ services:
         max-file: 5
         max-size: 120m
     volumes:
-      - ${CONFIG_DIR}:/config
-      - /home/ew/code-ew/code-server-custom-scripts:/custom-cont-init.d:ro
+      - ${CONFIG_DIR}/config:/config
+      - ${CONFIG_DIR}/code-server-custom-scripts:/custom-cont-init.d:ro
     environment:
       PUID: ${PUID}
       PGID: ${PGID}
