@@ -1,3 +1,7 @@
+networks:
+  backend:
+    external: true
+
 services:
   server:
     image: library/traefik:latest
@@ -12,13 +16,13 @@ services:
       - ${CONFIG_DIR}:/config
       - /etc/pve/local:/ssl:ro
     command:
-      - "--providers.file.watch=true"
-      - "--providers.file.filename=/config/traefik.yml"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--entryPoints.https.address=:8443"
+      - --providers.file.watch=true
+      - --providers.file.filename=/config/traefik.yml
+      - --api.insecure=true
+      - --providers.docker=true
+      - --entryPoints.https.address=:8443
     ports:
       - 8080:8080
       - ${SSL_PORT}:8443
     networks:
-      - backend
+      backend:
