@@ -1,26 +1,27 @@
 networks:
   backend:
-
+    external: true
 volumes:
   config_vol:
-
+    
 services:
-  codeserver:
+  server:
     image: linuxserver/code-server:latest
     restart: unless-stopped
-    privileged: true
+    # privileged: true
     logging:
       driver: json-file
       options:
         max-file: 5
         max-size: 120m
     networks:
-      - backend
+      backend:
+        aliases:
+          - codeserver
     volumes:
       - config_vol:/config
-      - ./config/data/User:/config/data/User
-      - ../:/Documents
-      - ./code-server-custom-scripts:/custom-cont-init.d:ro
+      - ${CONFIG_DIR}/config/data/User:/config/data/User
+      - ${CONFIG_DIR}/code-server-custom-scripts:/custom-cont-init.d:ro
     environment:
       PUID: ${PUID}
       PGID: ${PGID}
@@ -28,7 +29,6 @@ services:
       LC_ALL: nb_NO.UTF-8
       HASHED_PASSWORD: ${HASHED_PASSWORD}
       SUDO_PASSWORD_HASH: ${SUDO_PASSWORD_HASH}
-      DEFAULT_WORKSPACE: /config/data/User/Workspaces/dibk.code-workspace
       INSTALL_PACKAGES: lz4|bash|language-pack-nb-base
       DOCKER_MODS: linuxserver/mods:universal-package-install|linuxserver/mods:code-server-php-cli|linuxserver/mods:code-server-nodejs|linuxserver/mods:code-server-extension-arguments|linuxserver/mods:code-server-zsh
       VSCODE_EXTENSION_IDS: github.vscode-github-actions|nonoroazoro.syncing|ms-azuretools.vscode-docker|ms-vscode.azurecli|streetsidesoftware.code-spell-checker-norwegian-bokmal
@@ -39,37 +39,10 @@ services:
       SHELL: /usr/bin/zsh
     expose:
       - 8443
-    ports:
-      - 127.0.0.1:8081:8443
     labels:
       traefik.enable: true
-      traefik.http.routers.codeserver.rule: Host(`code-ew.dibk.no`)
+      traefik.http.routers.codeserver.rule: Host(`${CODE_HOSTNAME}`)
       traefik.http.routers.codeserver.entrypoints: https
       traefik.http.routers.codeserver.tls: true
-      traefik.docker.network: backend
-       
-  frontend:
-    image: library/traefik:latest
-    restart: unless-stopped
-    security_opt:
-      - label=type:container_runtime_t
-    environment:
-      TZ: Europe/Oslo
-      CF_DNS_API_TOKEN: ukyoF5uzdW49gdzi8Ubib6QYMhZZQZtU9mPpI_Rm
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:z
-      - config_vol:/config
-    command:
-      - "--providers.file.watch=true"
-      - "--providers.file.filename=/config/traefik_conf.yml"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--entryPoints.https.address=:8443"
-      - "--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare"
-      - "--certificatesresolvers.myresolver.acme.dnschallenge.delaybeforecheck=0"
-    networks:
-      - backend
-    ports:
-      - 127.0.0.1:8080:8080
-      - 8443:8443
- 
+      com.centurylinklabs.watchtower.enable: true
+      no.dibk.description: 'Kjøres under traefik med entrypoint https for å automatisk mappes opp mot tls'
